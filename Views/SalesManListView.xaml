@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Sales.Views.SalesManListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sales.Views"
+             xmlns:viewmodels="clr-namespace:Sales.ViewModels"
+             d:DataContext="{d:DesignInstance viewmodels:SalesManListViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid ItemsSource="{Binding SalesMen}" SelectedItem="{Binding SelectedSalesManViewModel}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding SalesMan.SalesManId}" Header="ID"/>
+                <DataGridTextColumn Binding="{Binding SalesMan.Firstname}" Header="Fornavn"/>
+                <DataGridTextColumn Binding="{Binding SalesMan.Lastname}" Header="Efternavn"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
