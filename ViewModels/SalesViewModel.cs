@@ -61,6 +61,8 @@ public class SalesViewModel : BaseViewModel {
         UpdateCommand = new UpdateProductLineCommand(productLinesStore, this, selectedSalesManStore);
         DeleteCommand = new DeleteProductLineCommand(productLinesStore, this);
 
+        this.productsStore.ProductsLoaded += ProductsStore_ProductsLoaded;
+
         // Listen to product line store actions
         this.productLinesStore.ProductLinesLoaded += ProductLinesStore_ProductLinesLoaded;
         this.productLinesStore.ProductLinesCreated += ProductLinesStore_ProductLinesCreated;
@@ -85,6 +87,8 @@ public class SalesViewModel : BaseViewModel {
     }
 
     protected override void Dispose() {
+        this.productsStore.ProductsLoaded -= ProductsStore_ProductsLoaded;
+
         this.productLinesStore.ProductLinesLoaded -= ProductLinesStore_ProductLinesLoaded;
         this.productLinesStore.ProductLinesCreated -= ProductLinesStore_ProductLinesCreated;
         this.productLinesStore.ProductLinesUpdated -= ProductLinesStore_ProductLinesUpdated;
@@ -93,6 +97,13 @@ public class SalesViewModel : BaseViewModel {
         this.selectedSalesManStore.SelectedSalesManChanged -= SelectedSalesManStore_SelectedSalesManChanged;
 
         base.Dispose();
+    }
+
+    /// <summary>
+    /// For updating SalesFormViewModel
+    /// </summary>
+    private void ProductsStore_ProductsLoaded() {
+        SelectedProductLine = this.selectedProductLine;
     }
 
     /// <summary>

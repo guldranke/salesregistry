@@ -24,14 +24,19 @@ public class GetAllProductLinesWithProductQuery : IGetAllProductLineWithProductQ
     public async Task<IEnumerable<ProductLineWithProduct>> Execute(SalesMan salesMan, DateTime startDate, DateTime endDate) {
         using SalesDbContext context = this.contextFactory.Create();
 
-        List<ProductLineDto> productLines = 
+        List<ProductLineDto> productLines =
             await context.ProductLines
             .Where((p) => p.SalesManId == salesMan.SalesManId)
             .Where((p) => p.SalesDate.Date >= startDate.Date && p.SalesDate.Date <= endDate.Date)
             .ToListAsync();
 
         var productLinesWithProduct = productLines.Select(async (p) => {
-            ProductDto product = await context.Products.Where((product) => product.ProductId == p.ProductId).SingleAsync();
+            string productName = "?";
+            try {
+                ProductDto product = await context.Products.Where((product) => product.ProductId == p.ProductId).SingleAsync();
+                productName = product.ProductName;
+            } catch { }
+            
             return new ProductLineWithProduct(
                     p.ProdLineId,
                     p.ProductId,
@@ -39,7 +44,7 @@ public class GetAllProductLinesWithProductQuery : IGetAllProductLineWithProductQ
                     p.SalesDate,
                     p.Price,
                     p.Amount,
-                    product.ProductName
+                    productName
                 );
         });
 
