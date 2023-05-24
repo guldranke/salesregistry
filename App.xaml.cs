@@ -4,7 +4,9 @@ using Sales.Queries;
 using Sales.Stores;
 using Sales.ViewModels;
 using Sales.Views;
+using System.Globalization;
 using System.Windows;
+using System.Windows.Markup;
 
 namespace Sales;
 
@@ -36,6 +38,10 @@ public partial class App : Application {
     private readonly IGetAllProductLineWithProductQuery getallProductLineWithProductQuery;
 
     public App() {
+        FrameworkElement.LanguageProperty.OverrideMetadata(
+          typeof(FrameworkElement),
+          new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
         DbContextOptions options = new DbContextOptionsBuilder().UseSqlite("Data Source=Sales.db").Options;
         contextFactory = new SalesDbContextFactory(options);
 

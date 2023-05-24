@@ -15,6 +15,8 @@ public class StatisticsViewModel : BaseViewModel {
     private readonly SelectedSalesManStore selectedSalesManStore;
     private readonly ProductLinesStore productLinesStore;
 
+    public string SelectedSalesManName => this.selectedSalesManStore.SelectedSalesMan?.Fullname ?? string.Empty;
+
     private DateTime startDate = DateTime.Now - TimeSpan.FromDays(14);
     public DateTime StartDate {
         get => startDate; set {

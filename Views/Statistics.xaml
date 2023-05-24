@@ -39,9 +39,15 @@
                 <DatePicker Grid.Column="4" SelectedDate="{Binding EndDate}"/>
                 <Button Grid.Column="5" Margin="10 0 0 0" Click="GetSalesClick">Hent salg</Button>
             </Grid>
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
-                <Label>Samlet salg for perioden:</Label>
+            <Grid Grid.Row="1"  Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0">Samlet salg for perioden:</Label>
                 <TextBox 
+                    Grid.Column="1"
                     IsReadOnly="True" 
                     Background="LightGray" 
                     FlowDirection="RightToLeft" 
@@ -49,7 +55,8 @@
                     VerticalAlignment="Center" 
                     Padding="5" 
                     MinWidth="100"/>
-            </StackPanel>
+                <Button Grid.Column="2" Click="GetPdf" HorizontalAlignment="Right" Padding="5">Print PDF</Button>
+            </Grid>
         </Grid>
         <DataGrid Grid.Row="1" ItemsSource="{Binding ProductLines}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
