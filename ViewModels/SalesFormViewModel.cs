@@ -35,13 +35,14 @@ public class SalesFormViewModel : BaseViewModel {
     private Product? selectedProduct;
     public Product? SelectedProduct {
         get => selectedProduct; set {
-            selectedProduct = value;
-            if(value != null) {
-                Price = value!.Price;
-                ProductId = value!.ProductId;
+            if(selectedProduct != value && value != null) {
+                selectedProduct = value;
+                ProductId = value.ProductId;
+                Price = value.Price;
+
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ProductDisplay));
             }
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(ProductDisplay));
         }
     }
 
@@ -72,10 +73,13 @@ public class SalesFormViewModel : BaseViewModel {
     public SalesFormViewModel(ProductLine productLine, List<Product> products) { 
         ProdLineId = productLine.ProdLineId;
         ProductId = productLine.ProductId;
-        Price = productLine.Price;
         Amount = productLine.Amount;
         SalesDate = productLine.SalesDate;
 
         SelectedProduct = products.Find((p) => p.ProductId == ProductId);
+
+        if(this.selectedProduct != null) {
+            Price = productLine.Price;
+        }
     }
 }

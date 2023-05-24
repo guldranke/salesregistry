@@ -23,7 +23,8 @@ public class UpdateProductLineQuery : IQuery<ProductLine> {
             SalesManId = productLine.SalesManId,
             SalesDate = productLine.SalesDate,
             Price = productLine.Price,
-            Amount = productLine.Amount
+            Amount = productLine.Amount,
+            TotalPrice = productLine.TotalPrice
         };
 
         context.ProductLines.Update(productLineDto);

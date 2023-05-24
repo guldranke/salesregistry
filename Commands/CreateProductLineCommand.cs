@@ -29,18 +29,13 @@ public class CreateProductLineCommand : BaseCommandAsync {
             return;
         }
 
-        int productId = form.ProductId;
-        DateTime salesDate = form.SalesDate;
-        double price = form.Price;
-        int amount = form.Amount;
-
         ProductLine productLine = new(
             0,
-            productId,
+            form.ProductId,
             this.selectedSalesManStore.SelectedSalesMan!.SalesManId,
-            salesDate,
-            price,
-            amount
+            form.SalesDate,
+            form.Price,
+            form.Amount
         );
 
         try {

@@ -126,7 +126,7 @@ public class SalesViewModel : BaseViewModel {
     private void ProductLinesStore_ProductLinesCreated(ProductLine productLine) {
         ProductLineViewModel? productLineViewModel = this.productLines.FirstOrDefault((p) => p.ProdLineId == -1);
 
-        if (productLineViewModel != null) {
+        if (productLineViewModel != null && !productLine.IsTemporary) {
             // Remove the temporary product line upon creating a new real product line  
             int index = this.productLines.IndexOf(productLineViewModel);
             this.productLines[index].Update(productLine);

@@ -114,11 +114,11 @@ public class ProductLinesStore {
 
         this.productLines.RemoveAll((p) => p.ProdLineId == productLine.ProdLineId);
 
-        ProductLinesDeleted?.Invoke(productLine);
-
         if (this.productLines.Count == 0) {
             AddTemporary(new ProductLine(-1, -1, 0, DateTime.Now, 0.00, 0));
         }
+
+        ProductLinesDeleted?.Invoke(productLine);
     }
 
     public async Task<IEnumerable<ProductLineWithProduct>> GetProductLineWithProducts(SalesMan salesMan, DateTime startDate, DateTime endDate) {

@@ -28,7 +28,6 @@ public class ProductsFormViewModel : BaseViewModel {
         get => productName; set {
             productName = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(CanSubmit));
         }
     }
 
@@ -36,8 +35,7 @@ public class ProductsFormViewModel : BaseViewModel {
     public double Price {
         get => price; set {
             price = value;
-            OnPropertyChanged();   
-            OnPropertyChanged(nameof(CanSubmit));
+            OnPropertyChanged(); 
         }
     }
 
